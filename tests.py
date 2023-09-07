@@ -110,3 +110,13 @@ class CupcakeViewsTestCase(TestCase):
             })
 
             self.assertEqual(Cupcake.query.count(), 2)
+
+    def test_delete_cupcake(self):
+        with app.app_context():
+            cupcake = Cupcake.query.get(self.cupcake_id)
+            with app.test_client() as client:
+                url = f'/api/cupcakes/{cupcake.id}'
+                resp = client.delete(url)
+                self.assertEqual(resp.status_code, 200)
+                data = resp.json
+                self.assertEqual(data, {'message': 'Deleted!'})
