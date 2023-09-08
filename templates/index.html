@@ -14,8 +14,16 @@
     <body>
         <div class="container">
             <h1>Cupcakes</h1>
+            <form class="search-cupcake-form">
+                <div>
+                    <label for="search">Search</label>
+                    <input type="text" name="search" id="search" />
+                </div>
+                <button>Search</button>
+            </form>
+            <ul class="search-cupcakes-list"></ul>
             <ul class="cupcakes-list"></ul>
-            <form action="/api/cupcakes" method="POST">
+            <form class="add-cupcake-form" method="POST">
                 <div>
                     <label for="flavor">Flavor</label>
                     <input type="text" name="flavor" id="flavor" required />
