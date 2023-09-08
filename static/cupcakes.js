@@ -1,14 +1,30 @@
-async function getAllCupcakes() {
-    const response = await axios.get('/api/cupcakes');
-    const data = response.data;
-    for (const cupcake of data['cupcakes']) {
-        $('.cupcakes-list').append(
+function displayCupcakes(container, cupcakes) {
+    for (const cupcake of cupcakes) {
+        $(container).append(
             `<li>${cupcake.flavor} <button class="remove-cupcake">X</button></li>`
         );
     }
 }
 
-$('form').submit(async (e) => {
+async function getAllCupcakes() {
+    const response = await axios.get('/api/cupcakes');
+    const cupcakes = response.data['cupcakes'];
+    displayCupcakes('.cupcakes-list', cupcakes);
+}
+
+$('.search-cupcake-form').submit(async (e) => {
+    e.preventDefault();
+    $('.search-cupcakes-list').empty();
+    let searchTerm = $('#search');
+    const response = await axios.get('/api/cupcakes/search', {
+        params: { searchTerm: searchTerm.val() },
+    });
+    const cupcakes = response.data['cupcakes'];
+    displayCupcakes('.search-cupcakes-list', cupcakes);
+    searchTerm.val('');
+});
+
+$('.add-cupcake-form').submit(async (e) => {
     e.preventDefault();
     let flavor = $('#flavor');
     let size = $('#size');
