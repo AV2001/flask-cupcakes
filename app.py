@@ -16,6 +16,16 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/api/cupcakes/search')
+def search_cupcake():
+    ''''''
+    search_term = request.args.get('searchTerm')
+    search = f'%{search_term}%'
+    cupcakes = Cupcake.query.filter(Cupcake.flavor.like(search)).all()
+    cupcakes = [cupcake.serialize() for cupcake in cupcakes]
+    return jsonify(cupcakes=cupcakes)
+
+
 @app.route('/api/cupcakes')
 def get_cupcakes():
     '''Returns all cupcakes.'''
