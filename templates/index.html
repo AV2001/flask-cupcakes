@@ -15,7 +15,25 @@
         <div class="container">
             <h1>Cupcakes</h1>
             <ul class="cupcakes-list"></ul>
-            <form action="/api/cupcakes" method="POST"></form>
+            <form action="/api/cupcakes" method="POST">
+                <div>
+                    <label for="flavor">Flavor</label>
+                    <input type="text" name="flavor" id="flavor" required />
+                </div>
+                <div>
+                    <label for="size">Size</label>
+                    <input type="text" name="size" id="size" required />
+                </div>
+                <div>
+                    <label for="rating">Rating</label>
+                    <input type="number" name="rating" id="rating" required />
+                </div>
+                <div>
+                    <label for="image">Image</label>
+                    <input type="text" name="image" id="image" />
+                </div>
+                <button>Add Cupcake</button>
+            </form>
         </div>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
