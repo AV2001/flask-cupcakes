@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from models import db, Cupcake
 
 app = Flask(__name__)
@@ -8,6 +8,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['secret_key'] = 'secret'
 
 db.init_app(app)
+
+
+@app.route('/')
+def home():
+    '''Display home page.'''
+    return render_template('index.html')
 
 
 @app.route('/api/cupcakes')
